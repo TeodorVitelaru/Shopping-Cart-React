@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom'
+import {HashRouter as Router, Routes, Route} from 'react-router-dom'
 import ProductListPage from './pages/productList'
 import ProductDetailsPage from './pages/productDetails'
 import CartListPage from './pages/cartList'
@@ -8,7 +8,7 @@ import Navbar from './components/navbar'
 function App() {
 
   return (
-    <Fragment>
+    <Router>
       <Navbar />
     <Routes>
       <Route path='/products' element={<ProductListPage/>} />
@@ -17,7 +17,7 @@ function App() {
 
     </Routes>
     
-    </Fragment>
+    </Router>
   )
 }
 
