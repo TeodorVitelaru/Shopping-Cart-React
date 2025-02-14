@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import ShoppingCartProvider from './context/index.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/Shopping-Cart-React">
     <ShoppingCartProvider>
       <App/>
     </ShoppingCartProvider>
