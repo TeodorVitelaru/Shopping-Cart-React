@@ -14,7 +14,7 @@ export default function ProductListPage(){
                 <div className="max-w-md mx-auto text-center pb-5">
                     <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-500 text-center ">Our featured Products</h2>
                 </div>
-                <div className="grid grid-cols-2 gap-10 mt-10 lg:mt-16 lg:gap-8 lg:grid-cols-4 m:grid-cols-2 sm:grid-cols-1">
+                <div className="grid grid-cols-2 gap-10 mt-10 lg:mt-16 lg:gap-8 lg:grid-cols-4 m:grid-cols-2">
                     {
                         listOfProducts && listOfProducts.length > 0 ?
                         listOfProducts.map((item, idItem)=>
