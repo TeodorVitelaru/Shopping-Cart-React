@@ -21,7 +21,7 @@ export default function CartListPage(){
                     {
                         cartItems?.length ?
                         cartItems.map(singleCartItem=><CartTitle singleCartItem={singleCartItem}/>)
-                        : <h1>No Items in the cart</h1>
+                        : <h1 className="bg-gradient-to-r from-gray-100 to-gray-300">No Items in the cart</h1>
                     }
                 </div>
                 <div className="!bg-gray-200 !rounded-sm p-4 h-max">
