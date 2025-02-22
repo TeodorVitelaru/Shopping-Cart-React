@@ -1,0 +1,198 @@
+===========
+REACT BASIC
+===========
+npm create vite@latest nume-proiect -- creem un proiect in react cu vite
+npm run dev -- pornim serverul cu site ul
+npm i react-router-dom
+component --> o functie
+...props -- pentru a primi tot ce a primit si parintele
+const [todos, setTodos] = useState([
+      { input: 'Hello! Add your first todo!', complete: true },
+      { input: 'Get the groceries!', complete: false },
+      { input: 'Learn how to web design', complete: false },
+      { input: 'Say hi to gran gran', complete: true }
+    ])  -- default value for todoList
+        --todo --variabila
+        --setTodos -- setiing function
+
+ --reacte statefull variable -- este imutabila
+ const newTodoList = [...todos] -- creaza o duplicata la todos
+ <input value={inputvalue}
+                onChange={(e)=>{setInputValue(e.target.value)}}
+             placeholder="Add task"/> -- am adaugat sa se seteaza valaoarea in mod constant
+--useEffect hook!! -- for tracking events
+useEffect(() =>{}, []) -- contine un arrow function, apoi un dependencies array
+                       -- asta inseamna sa ruleze cand se deschide app ul
+--CAND FOLOSIM MAP SI VREAU SA RETURNEZ CV HTML, SA NU PUN {}, ci sa incep direct cu div
+
+
+
+=======
+POKEDEX
+=======
+modal -- pop up pe ecran
+unde integram API?
+useEffect
+useReducer
+useContext
+
+
+
+<Fragment -- wrap multiple fragment into one
+<Fragment>
+            <Dialog onClose={()=> setOpenDialog(false)}
+            open={openDialog}>
+                <DialogTitle>{todoDetails?.todo}</DialogTitle>
+                <DialogActions>
+                    <Button onClick={()=>{
+                        setTodoDetails(null)
+                        setOpenDialog(false)
+                    }}>Close</Button>
+                </DialogActions>
+            </Dialog>
+        </Fragment>
+-- fragment de cod care gestioneaza deschiderea unui dialog si 
+daca apas in afara lui, se va inchide (onClose={()=> setOpenDialog(false))
+
+
+
+=====
+FORMS
+=====
+-- trebuie sa punem la form onSubmit -- call la functie
+event.preventDefault -- nu se da reload la pagina
+--butonul trebuie sa fie type="submit"
+event.target.name == numele campului care se schimba
+onChange={(event)=>({
+                    ...formData,
+                    [event.target.name]: event.target.value
+                })}/> -- mai rapid
+login/register -- common-form -- input, textarea, select components
+
+
+
+================
+ROUTARE IN REACT
+================
+e nevoie sa adaugam npm i react-router-dom
+si sa integram in main.jsx, aplicatia in BrowserRouter
+
+Avem componenta Routes:
+<Routes>
+    <Route path="/recipe-list" element= {<ReceipeList />}/>
+    <Route path="/comments-list" element= {<CommentsList / />
+</Routes>
+
+Pentru a naviga:
+--const navigate = useNavigate()
+--pe buton se pune onClick={()=>navigate("comments-list")}
+--folosim componenta Link: <Link to={'/recipe-list'}>E fain ca poti pune cuvinte</Link>
+
+ROUTARE DINAMICA
+--<Route path="/recipe-list/:id" element={<RecipeDetailsPage/>}/> -- orice id ii dai se duce pe pagina aia
+--const params = useParams() -- asa iei parametrii de aici
+-- const {id} = params -- destructure
+-- const location = useLocation() -- path spre pagina pe care esti si diverse infos (search(?name=ceva), key, hash, state)
+-- path="*" -- pentru orice alta ruta
+-- ne putem face noi o functie de customRoutes care sa face acelasi lucru, si doar o apelam in App ca o componenta
+
+============
+CUSTOM HOOKS
+============
+useRef() -- este util ca sa accesez elemente DOM
+useMemo() -- 
+useCall() --
+
+TanStack Query
+npm i @tanstack/react-query -- pentru instalare
+--in main.jsx creem un query pe care l am dat ca parametru mai jos
+<QueryClientProvider client={queryClient}>
+    <App/>
+  </QueryClientProvider> -- punem acest cod in main.jsx
+const {data, isLoading} = useQuery({
+        queryKey: ["productList"],
+        queryFn: () => fetchListOfProducts()
+    }) -- asta facem unde vrem sa accesam datele
+
+
+=========
+CART PROJ
+=========
+--facem un context in care avem loading stage, lista noaste si toate useState urile necesare
+--cand apasa pe buton, vreau sa acces informatiile de la produs
+    -adaugam handleAddToCart la context
+    -mergem la detalii
+--localStorage.setItem('cartItems', JSON.stringify(cpyExistingCartItems)) -- salvez in localStorage
+setCartItems(JSON.parse(localStorage.getItem('cartItems'))) -- punem asta in useEffect ca se mearga
+
+
+
+
+========
+FIREBASE
+========
+--intru pe console.firebase.google.com, fac proiect, intru pe butonul "</>", fac config files
+--pt auth: intru la build, authentication: getstarted
+--trebuie neaparat sa retin informatiile despre user dupa ce s a logat
+--event.preventDefault() -- sa pun in handle
+
+
+
+
+=============
+REDUX TOOLKIT
+=============
+npm install @reduxjs/toolkit react-redux
+--pare sa fie ca un fel de context
+--trebuie sa creez folder slices, index.js cu store ul, apoi counter.js unde este logica din spate
+const dispatch = useDispatch() -- dispatch from our store
+--nanoid() -- iti face el un id
+--trebuie sa dam destructure de la action si payload de obicei in slide
+--const findIndexOfCurrentBlogItem = cpyBlogList.findIndex(item => item.id ===state.currentEditedBlogId) 
+    (sugestie pentru a gasi indexul unui element cautat)
+
+
+
+
+=======
+ZUSTAND
+=======
+--trebuie sa facem ca mai sus un store
+--create the hook, to the manipulation and export it
+--const stateValue = useCounter(state=>state) -- asa se foloseste in components
+--e ca un fel de mod de manipulare a datelor, de a le avea intr un singur localStorage
+--pentru API:const apiResponse = await fetch('https://dummyjson.com/products')
+            const result = await apiResponse.json()
+        }
+--export const useActions = ()=> useCounter(state=>state.actions)
+        (putem pune asa toate functiile intr un atribut function apoi dam export ca si cum ar fi alt hook)
+
+
+
+
+============
+UNIT TESTING
+============
+npm install -D @babel/preset-env @babel/preset-react jest @testing-library/react 
+@testing-library/jest-dom jest-environment-jsdom @testing-library/user-event
+--mergem la package.json si adaugam "test" : "jest" la scripts
+--facem un fisier .babelrc
+--facem un fisier jest.config.cjs
+--npm run test -- ca sa rulam testele
+--putem seta data-testid pe un element in componenta mea react
+--anfn -- arrow function
+describe('api testing file', () => {
+    test()
+    test()
+}) -- pentru mai multe teste intr un singur fisier
+
+
+
+
+
+"homepage": "https://TeodorVitelaru.github.io/Shopping-Cart-React/",
+
+
+
+
+
